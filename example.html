@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+  
+  <style>
+  #elementToStick.sticky{
+    position: fixed;
+    top: 0px;
+  }
+  </style>
+</head>
+<body>
+  <header style="width: 100vw; height: 200px;background: green"></header>
+  
+  <!-- Element that i want to make sticky after scrolling over #sticky-helper element -->
+  <div id="elementToStick" style="width: 100vw; height: 200px;background: red"></div>
+  
+  <div id="sticky-helper"></div>
+  
+  <div id="content" style="width: 100vw; height: 300vh;background: blue"></div>
+</body>
+  
+  <!--elementToStick goes sticky only after scrolling over stickyHelper element-->
+  <script>
+    const elementToStick = document.querySelector("#page-menu")
+    const stickyHelper = document.querySelector("#sticky-helper")
+    const observer = new IntersectionObserver( 
+      ([e]) => {
+        if( (e.intersectionRatio < 1) && (window.scrollY > stickyHelper.offsetTop)){
+          elementToStick.classList.add("sticky");
+          return;
+        }
+        elementToStick.classList.remove("sticky")
+      },
+      { threshold: [1] }
+    );
+
+    observer.observe(stickyHelper);
+  </script>
+  
+</html>
+
+
+
